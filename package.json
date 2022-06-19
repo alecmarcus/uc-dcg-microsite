@@ -1,0 +1,27 @@
+{
+  "name": "dcg-institute-website",
+  "version": "1.0.0",
+  "description": "A simple website for the UConn + DGC Institute.",
+  "author": "Alec Marcus <alec@alecmarc.us>",
+  "private": true,
+  "source": "index.html",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "scripts": {
+    "start": "parcel ./*.html",
+    "build": "parcel build ./*.html"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "2.6.0",
+    "@tsconfig/recommended": "^1.0.1",
+    "@types/animejs": "^3.1.4",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "parcel": "latest"
+  },
+  "dependencies": {
+    "@swc/helpers": "^0.3.17",
+    "animejs": "^3.2.1"
+  }
+}

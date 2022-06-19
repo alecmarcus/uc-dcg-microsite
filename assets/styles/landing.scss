@@ -1,0 +1,63 @@
+@import "./vars/media";
+
+#scroll-timeline {
+  height: 175vh;
+}
+
+.scroll-timeline-content {
+  position: sticky;
+  top: 0;
+}
+
+.landing {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.hero {
+  --fs: var(--fs-5);
+  --lh: var(--lh-1);
+
+  letter-spacing: -0.04em;
+  margin-bottom: 1.25em;
+  margin-top: 1.25em;
+  min-height: calc(var(--fs) * var(--lh) * 3);
+  position: relative;
+
+  @media (min-width: $media-sm) {
+    margin-bottom: 1em;
+    margin-top: 1em;
+  }
+}
+
+.hero-phrase {
+  display: block;
+  max-width: 12ch;
+  position: absolute;
+
+  .word {
+    display: inline-block;
+    margin: -0.25em -0.05em;
+    overflow: hidden;
+    padding: 0 0.05em 0.25em;
+    position: relative;
+  }
+
+  .letter {
+    display: inline-block;
+    transform: translateY(1.25em);
+  }
+}
+
+.hero-phrase-2 {
+  --fw: var(--fw-6);
+}
+
+.overview {
+  --fs: var(--fs-2);
+  --fw: var(--fw-3);
+
+  column-count: 2;
+  hyphens: auto;
+  max-width: 90ch;
+}

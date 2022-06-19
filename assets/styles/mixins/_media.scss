@@ -1,0 +1,14 @@
+@import "../vars/media";
+
+@mixin media($size, $limit: "min", $dim: "width") {
+  @if ($limit == "min") {
+    @media (min-#{$size}: map-get($media, $size)) {
+      @content;
+    }
+  }
+  @if ($limit == "max") {
+    @media (max-#{$size}: (map-get($media, $size) - 1)) {
+      @content;
+    }
+  }
+}
