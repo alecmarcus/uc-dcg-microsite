@@ -1,7 +1,7 @@
 {
   "name": "dcg-institute-website",
   "version": "1.0.0",
-  "description": "A simple website for the UConn + DGC Institute.",
+  "description": "A simple website for the UConn DGC Institute.",
   "author": "Alec Marcus <alec@alecmarc.us>",
   "private": true,
   "source": "index.html",

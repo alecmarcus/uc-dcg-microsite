@@ -43,8 +43,8 @@ class EmailForm {
 
   get elsReady() {
     return !!(
-      this.dataInputs.every(input => !!input) &&
-      this.userInputs.every(input => !!input) &&
+      this.dataInputs.every(input => input) &&
+      this.userInputs.every(input => input) &&
       this.userSubmit
     );
   }
@@ -54,9 +54,13 @@ class EmailForm {
     dataInput: HTMLInputElement,
     validator?: (input: string) => boolean,
   ) {
+    // Select all contents on input focus.
     userInput.addEventListener("focus", () =>
+      // Timeout is needed to prevent interaction bugs, eg, if the user slightly moves their cursor after clicking.
       window.setTimeout(() => {
-        let sel: Selection | null, range: Range;
+        let sel: Selection | null;
+        let range: Range;
+
         if (window.getSelection && document.createRange) {
           range = document.createRange();
           range.selectNodeContents(userInput);
@@ -67,10 +71,12 @@ class EmailForm {
       }, 1),
     );
 
+    // Deselect on blur.
     userInput.addEventListener("blur", () => {
       window.getSelection()?.removeAllRanges();
     });
 
+    // Handle enter
     userInput.addEventListener("keydown", (e: KeyboardEvent) => {
       if (e.key === "Enter") {
         e.preventDefault();
@@ -78,15 +84,19 @@ class EmailForm {
       }
     });
 
+    // If an input is emptied and then blurred, reset it to the placeholder.
     userInput.addEventListener("blur", () => {
       if (userInput.innerHTML === "" && userInput.dataset.placeholder) {
         userInput.innerText = userInput.dataset.placeholder;
       }
     });
 
+    // Bind user and data inputs.
     userInput.addEventListener("input", () => {
+      // On input event, set data value to match input content.
       dataInput.setAttribute("value", userInput.innerText);
 
+      // Validate as the user types.
       dataInput.dataset.valid = validator
         ? `${validator(dataInput.value)}`
         : `${dataInput.value.length > 0}`;
@@ -97,6 +107,7 @@ class EmailForm {
         userInput.classList.remove("valid");
       }
 
+      // Ensure global validation is up to date.
       if (this.canSubmit) {
         this.userSubmit?.removeAttribute("disabled");
       } else {
@@ -105,6 +116,13 @@ class EmailForm {
     });
   }
 
+  /**
+   * Criteria:
+   * At least one "@"
+   * At least one "."
+   * "." is more than 1 char away from the end of the string (TLD is at least 2 chars long)
+   * String as at least 5 chars long
+   */
   validateEmail(value: string) {
     return (
       value.indexOf("@") > -1 &&
@@ -114,6 +132,10 @@ class EmailForm {
     );
   }
 
+  /**
+   * Submit function to work with Netlify forms.
+   * @see https://docs.netlify.com/forms/setup/#submit-html-forms-with-ajax
+   */
   submit() {
     if (this.canSubmit) {
       const formData = new FormData(this.dataForm);

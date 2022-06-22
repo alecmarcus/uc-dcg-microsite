@@ -1,8 +1,8 @@
-@import "./vars/_media.scss";
-@import "./funcs/_strip-unit.scss";
-@import "./mixins/_selectors.scss";
-
-/* Static variable assignments */
+/*
+ * Static variable assignments.
+ *
+ * These values should not be changed, only referenced.
+ */
 
 :root {
   --true-black: black;
@@ -59,7 +59,12 @@
   --t-from: var(--dur-03) var(--expo-in);
 }
 
-/* Dynamic variable assignments */
+/*
+ * Dynamic property assignments
+ *
+ * Top-down structure. These properties can be changed
+ * anytime to alter their children.
+ */
 
 body {
   --ff: var(--ff-sans);
@@ -92,7 +97,12 @@ body {
   color-scheme: light;
 }
 
-/* Dynamic variable applications */
+/*
+ * Dynamic variable applications
+ *
+ * These selectors "capture" dynamic property assignments.
+ * Use as low in the tree/cascade as possible.
+ */
 
 .bg {
   background-color: var(--back);
@@ -111,36 +121,15 @@ body {
   }
 }
 
-/* Utility classes */
-
-.flex-center {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-}
-
-.absolute-width {
-  left: 0;
-  position: absolute;
-  right: 0;
-}
-
-.absolute-fill {
-  inset: 0;
-  position: absolute;
-}
-
-.fixed-fill {
-  inset: 0;
-  position: fixed;
-}
+/*
+ * Utility classes
+ */
 
 .section {
   margin: var(--section-space) var(--site-margin);
 }
 
-/* SR Only */
-// https://gist.github.com/ffoodd/000b59f431e3e64e4ce1a24d5bb36034
+// Screen reader only -- for hiding things accessibly. https://gist.github.com/ffoodd/000b59f431e3e64e4ce1a24d5bb36034
 .sr-only {
   border: 0 !important;
   clip: rect(1px, 1px, 1px, 1px) !important;

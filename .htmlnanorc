@@ -1,11 +1,3 @@
 {
-  "collapseAttributeWhitespace": false,
-  "collapseBooleanAttributes": false,
-  "collapseWhitespace": false,
-  "custom": [],
-  "deduplicateAttributeValues": false,
-  "mergeScripts": false,
-  "mergeStyles": false,
-  "minifyJson": false,
   "minifySvg": false
 }

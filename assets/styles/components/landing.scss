@@ -1,14 +1,3 @@
-@import "./vars/media";
-
-#scroll-timeline {
-  height: 175vh;
-}
-
-.scroll-timeline-content {
-  position: sticky;
-  top: 0;
-}
-
 .landing {
   margin-top: 0;
   margin-bottom: 0;
@@ -34,6 +23,7 @@
   display: block;
   max-width: 12ch;
   position: absolute;
+  transform: translateY(0.175em);
 
   .word {
     display: inline-block;

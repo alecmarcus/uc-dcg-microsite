@@ -1,8 +1,5 @@
-@import url("./reset.css");
-@import url("./fonts.css");
-@import url("util");
-@import url("header");
-@import url("landing");
-@import url("content");
-@import url("form");
-@import url("footer");
+@import "partials"; // SASS vars, mixins, and functions. No visible output, required globally.
+@import "./fonts.css"; // @font-face rules. No visible output, required globally.
+@import "./reset.css"; // UA reset.
+@import "util"; // CSS custom properties and utility classes.
+@import "components"; // Component styles.
