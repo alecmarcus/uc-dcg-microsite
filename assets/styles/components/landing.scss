@@ -12,6 +12,7 @@
   margin-top: 1.25em;
   min-height: calc(var(--fs) * var(--lh) * 3);
   position: relative;
+  z-index: -200;
 
   @media (min-width: $media-sm) {
     margin-bottom: 1em;
@@ -50,4 +51,21 @@
   column-count: 2;
   hyphens: auto;
   max-width: 90ch;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+canvas {
+  animation: fade-in 1000ms var(--expo-out) 300ms both;
+  inset: 0;
+  position: fixed;
+  z-index: -100;
 }

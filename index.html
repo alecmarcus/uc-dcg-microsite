@@ -46,7 +46,7 @@
     </defs>
   </svg>
 
-  <main>
+  <main id="root">
     <header class="header-wrapper">
       <ul class="header-content">
         <li class="header-item header-item-logo">
@@ -113,8 +113,8 @@
         with emails to
         <span data-placeholder="toshi@nakamoto.me" id="email-input" role="textbox" aria-label="Your email address"
           tabindex="0" class="input email" contenteditable="true" id="subscribe-email">toshi@nakamoto.me</span>.
-        <button disabled="true" type="submit" class="submit" id="submit-input">Subscribe
-          me.<span>&nbsp;</span>&rarr;</button>
+        <button disabled="true" type="submit" class="submit" id="submit-input">
+          <span>Subscribe me.</span><span>&nbsp;</span><span>&rarr;</span></button>
       </div>
       <div class="confirmation sans">
         <p>
@@ -189,6 +189,9 @@
 
   </main>
 
+  <script src="assets/scripts/Scene/vendor/three.min.js"></script>
+  <script src="assets/scripts/Scene/raymarcher.js"></script>
+  <script src="assets/scripts/Scene/index.js"></script>
   <script type="module" src="assets/scripts/index.ts"></script>
 </body>
 
