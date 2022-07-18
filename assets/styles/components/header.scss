@@ -57,12 +57,12 @@
   display: block;
   opacity: 0;
   padding: 0.5em;
+  pointer-events: none;
   position: absolute;
   right: -0.25em;
   top: 2.75em;
   transition: top var(--t-to);
   width: max-content;
-  pointer-events: none;
 
   .header-link:hover &,
   .header-link:focus-visible & {
