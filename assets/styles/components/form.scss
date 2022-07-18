@@ -36,6 +36,7 @@
   text-decoration-color: var(--text);
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
+  text-decoration-style: dashed;
 
   color: var(--secondary);
   display: inline-block;
@@ -68,9 +69,10 @@
   --fw: var(--fw-6);
 
   border-radius: 4px;
-  border: 1px solid currentColor;
+  border: 1px solid var(--text);
   cursor: pointer;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   margin-top: 0.5em;
   overflow: hidden;
@@ -78,31 +80,44 @@
   position: relative;
   transition: color var(--t-to);
   width: 100%;
+  background: var(--text);
+
+  span {
+    color: var(--back);
+    position: relative;
+    z-index: 100;
+  }
 
   &::after {
     background: var(--back);
+    bottom: 0;
     content: "";
     display: block;
     flex: none;
-    height: 106%;
-    left: -3%;
-    mix-blend-mode: difference;
+    left: 0;
+    background-blend-mode: difference;
     position: absolute;
-    bottom: -3%;
-    transform: scaleY(0);
-    transition: transform var(--t-to);
-    width: 106%;
+    top: 100%;
     transform-origin: bottom left;
+    transition: top var(--t-to);
+    width: 100%;
   }
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
+    span {
+      mix-blend-mode: difference;
+    }
+
     &::after {
-      transform: scaleY(1);
+      top: 0;
     }
   }
 
   &:disabled {
-    color: var(--secondary);
+    background-color: var(--disabled);
+    border-color: var(--disabled);
+    color: var(--back);
     pointer-events: none;
   }
 }

@@ -11,10 +11,12 @@
   --text-black: hsl(222, 14%, 10%);
 
   --beige: hsl(41, 22%, 86%);
-  --beige-gray-05: hsl(41, 10%, 65%);
+  --beige-gray-dark: hsl(41, 6%, 45%);
+  --beige-gray-light: hsl(41, 8%, 70%);
 
   --navy: hsl(222, 100%, 9%);
-  --navy-gray-05: hsl(222, 8%, 34%);
+  --navy-gray-dark: hsl(222, 8%, 34%);
+  --navy-gray-light: hsl(222, 8%, 64%);
 
   --media-xxs: #{strip-unit($media-xxs)};
   --media-xs: #{strip-unit($media-xs)};
@@ -86,14 +88,16 @@ body {
 .dark {
   --text: var(--text-white);
   --back: var(--navy);
-  --secondary: var(--navy-gray-05);
+  --secondary: var(--navy-gray-dark);
+  --disabled: var(--navy-gray-light);
   color-scheme: dark;
 }
 
 .light {
   --text: var(--text-black);
   --back: var(--beige);
-  --secondary: var(--beige-gray-05);
+  --secondary: var(--beige-gray-dark);
+  --disabled: var(--beige-gray-light);
   color-scheme: light;
 }
 
