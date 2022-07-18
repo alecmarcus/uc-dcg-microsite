@@ -1,3 +1,5 @@
+import * as THREE from "three";
+
 const fragment = `
 uniform vec2 resolution;
 uniform float time;
@@ -348,7 +350,7 @@ const RayMarcher = (function () {
     //geometry setup
 
     this.geom = new THREE.BufferGeometry();
-    this.geom.addAttribute(
+    this.geom.setAttribute(
       "position",
       new THREE.BufferAttribute(
         new Float32Array([
@@ -538,3 +540,5 @@ const RayMarcher = (function () {
 
   return RayMarcher;
 })();
+
+export default RayMarcher;

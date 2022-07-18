@@ -2,7 +2,12 @@ import { onDocumentReady } from "./utils";
 import HeroText from "./HeroText";
 import EmailForm from "./EmailForm";
 
+// @ts-ignore
+import Scene from "./Scene/index.js";
+
 onDocumentReady(() => {
+  new Scene();
+
   const heroText = document.getElementById("hero");
   if (heroText) {
     new HeroText(heroText as HTMLHeadingElement);
