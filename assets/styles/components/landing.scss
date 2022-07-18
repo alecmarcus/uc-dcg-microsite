@@ -20,11 +20,23 @@
   }
 }
 
+@keyframes stall {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .hero-phrase {
+  animation: stall 1ms linear 1ms both;
   display: block;
   max-width: 12ch;
+  opacity: 0;
+  perspective: 1000;
   position: absolute;
-  transform: translateY(0.175em);
+  transform: translateY(0.175em) translate3d(0, 0, 0);
 
   .word {
     display: inline-block;
