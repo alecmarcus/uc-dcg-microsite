@@ -1,6 +1,6 @@
 import "focus-visible";
 
-import { onDocumentReady } from "./utils";
+import { mobileAndTabletCheck, onDocumentReady } from "./utils";
 import HeroText from "./HeroText";
 import EmailForm from "./EmailForm";
 
@@ -8,7 +8,9 @@ import EmailForm from "./EmailForm";
 import Scene from "./Scene/index.js";
 
 onDocumentReady(() => {
-  new Scene();
+  if (!mobileAndTabletCheck()) {
+    new Scene();
+  }
 
   const heroText = document.getElementById("hero");
   if (heroText) {

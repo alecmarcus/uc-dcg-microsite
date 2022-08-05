@@ -40,7 +40,7 @@ class Scene {
       }
     };
 
-    document.addEventListener("pointermove", e => {
+    document.addEventListener("mousemove", e => {
       // Stop animation and follow mouse movements.
       this.animation !== null && this.clearMouseAnimation();
 
