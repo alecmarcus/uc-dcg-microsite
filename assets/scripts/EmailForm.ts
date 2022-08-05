@@ -144,7 +144,10 @@ class EmailForm {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData as never as string).toString(),
       })
-        .then(() => this.userForm.classList.add("submitted"))
+        .then(() => {
+          this.userForm.classList.add("submitted");
+          setTimeout(() => this.userForm.classList.add("removed"), 1000);
+        })
         .catch(error => alert(error));
     }
   }

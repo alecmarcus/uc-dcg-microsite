@@ -109,12 +109,13 @@
         I&rsquo;m a <span data-placeholder="prospective
           student" id="about-input" role="textbox" aria-label="Who you are" tabindex="0" class="input"
           contenteditable="true" id="subscribe-type">prospective
-          student</span>. You can keep me updated
-        with emails to
+          student</span>. Keep me updated with emails to
         <span data-placeholder="toshi@nakamoto.me" id="email-input" role="textbox" aria-label="Your email address"
           tabindex="0" class="input email" contenteditable="true" id="subscribe-email">toshi@nakamoto.me</span>.
         <button disabled="true" type="submit" class="submit" id="submit-input">
-          <span>Subscribe me.</span><span>&nbsp;</span><span>&rarr;</span></button>
+          <span>Subscribe me.</span><span>&nbsp;</span><span>&rarr;</span>
+        </button>
+        <span id="form-disabled-tooltip" class="bg light-inverted">Please fill out all 3 of the fields above.</span>
       </div>
       <div class="confirmation sans">
         <p>
@@ -132,13 +133,13 @@
 
     <footer class="footer section sans">
       <section class="footer-section">
-        <ul class="footer-grid footer-logo-list">
-          <li class="footer-logo-wrapper">
+        <ul class="footer-logo-list">
+          <li class="footer-logo-item">
             <svg viewBox="0 0 87 18" class="footer-logo">
               <use href="#wordmark-svg" />
             </svg>
           </li>
-          <li class="footer-logo-wrapper">
+          <li class="footer-logo-item">
             <svg viewBox="0 0 144 100" class="footer-logo">
               <use href="#dcg-full-svg" />
             </svg>
@@ -146,50 +147,28 @@
         </ul>
       </section>
       <section class="footer-section">
-        <ul class="footer-grid">
-          <ul class="footer-link-list">
-            <li><a href="https://uconn.edu/">UConn Home</a></li>
-            <li><a href="https://uconn.edu/disclaimers-privacy-copyright/">Disclaimers, Privacy, &amp; Copyright</a>
-            </li>
-            <li><a href="https://accessibility.uconn.edu/">Accessibility</a></li>
-          </ul>
-          <ul class="footer-link-list">
-            <li><a href="https://uconn.edu/admissions/">Admissions</a></li>
-            <li><a href="https://uconn.edu/about-us/">About UConn</a></li>
-            <li><a href="https://uconn.edu/academics/">Academics</a></li>
-            <li><a href="https://uconn.edu/campus-life/">Campus Life</a></li>
-            <li><a href="https://uconn.edu/research/">Research</a></li>
-            <li><a href="https://uconn.edu/athletics/">Athletics</a></li>
-            <li><a href="https://uconn.edu/uconn-health/">UConn Health</a></li>
-          </ul>
-          <ul class="footer-link-list">
-            <li><a href="https://uconn.edu/az/">A&ndash;Z Index</a></li>
-            <li><a href="https://uconn.edu/careers/">Careers</a></li>
-            <li><a href="https://uconn.edu/construction/">Construction</a></li>
-            <li><a href="https://uconn.edu/entrepreneurship/">Entrepreneurship</a></li>
-            <li><a href="https://www.foundation.uconn.edu/">Giving</a></li>
-            <li><a href="https://global.uconn.edu/">Global</a></li>
-          </ul>
-          <ul class="footer-link-list">
-            <li><a href="https://uconn.edu/admissions/prospective-students/">Prospective Students</a></li>
-            <li><a href="https://uconn.edu/audience-students/">Students</a></li>
-            <li><a href="https://uconn.edu/audience-alumni/">Alumni</a></li>
-            <li><a href="https://uconn.edu/audience-visitors/">Visitors</a></li>
-            <li><a href="https://uconn.edu/audience-business-partners/">Business Partners</a></li>
-            <li><a href="https://facultystaff.uconn.edu/">Faculty & Staff</a></li>
-          </ul>
+        <ul class="footer-link-list">
+          <li><a href="https://uconn.edu/">UConn Home</a></li>
+          <li><a href="https://uconn.edu/disclaimers-privacy-copyright/">Disclaimers, Privacy, &amp; Copyright</a>
+          </li>
+          <li><a href="https://accessibility.uconn.edu/">Accessibility</a></li>
+          <li><a href="https://uconn.edu/about-us/">About UConn</a></li>
+          <li><a href="https://uconn.edu/az/">A&ndash;Z Index</a></li>
         </ul>
       </section>
-      <section class="footer-grid footer-section">
-        <p class="footer-info">Storrs, Connecticut 06269</p>
-        <p class="footer-info"><a href="tel:(860) 486-2000">(860) 486-2000</a></p>
-        <p class="footer-info copyright">© <span id="year"></span> University of Connecticut</p>
+      <section class="footer-section">
+        <ul class="footer-info-list">
+          <li class="footer-info-item">Storrs, Connecticut 06269</li>
+          <li class="footer-info-item"><a href="tel:(860) 486-2000">(860) 486-2000</a></li>
+          <li class="footer-info-item copyright">© <span id="year"></span> University of Connecticut</li>
+        </ul>
       </section>
     </footer>
 
   </main>
 
   <script type="module" src="assets/scripts/index.ts"></script>
+  <!-- <script src="/node_modules/focus-visible/dist/focus-visible.min.js"></script> -->
 </body>
 
 </html>

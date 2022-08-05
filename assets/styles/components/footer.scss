@@ -1,3 +1,33 @@
+@mixin row($gap: 0.75em, $basis) {
+  display: flex;
+  flex-direction: row;
+
+  li {
+    flex: 0 1 $basis;
+    padding: 0;
+  }
+
+  li + li {
+    padding-top: 0;
+    padding-left: $gap;
+  }
+}
+
+@mixin col($gap: 0.75em) {
+  display: flex;
+  flex-direction: column;
+
+  li {
+    flex: 0 1 auto;
+    padding: 0;
+  }
+
+  li + li {
+    padding-left: 0;
+    padding-top: $gap;
+  }
+}
+
 .footer {
   --lh: var(--lh-2);
   --fs: var(--fs-1);
@@ -5,12 +35,8 @@
   text-align: center;
   margin-bottom: var(--site-margin);
 
-  @media (min-width: $media-xxs) {
+  @media (min-width: $media-sm) {
     text-align: left;
-  }
-
-  @media (min-width: $media-lg) {
-    width: calc(100% / 6 * 4);
   }
 }
 
@@ -21,7 +47,7 @@
     color: var(--secondary);
   }
 
-  &:focus-visible {
+  &.focus-visible {
     color: var(--back);
     background: var(--text);
   }
@@ -32,85 +58,36 @@
 
   @media (max-width: $media-sm) {
     & + & {
-      border-top: 1px solid var(--secondary);
+      border-top: 1px solid var(--disabled);
       padding-top: calc(var(--site-margin) * 2);
     }
   }
 }
 
-.footer-grid {
-  display: flex;
-  flex-direction: column;
-
-  @media (min-width: $media-xxs) {
-    margin-right: -0.75em;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-    > * {
-      flex: 0 1 calc(50% - 0.75em);
-    }
-  }
-
-  @media (min-width: $media-sm) {
-    flex-wrap: nowrap;
-
-    > * {
-      flex: 0 1 25%;
-    }
-  }
-}
-
 .footer-logo-list {
-  flex-direction: row;
-
-  > * {
-    flex: 0 1 calc(50% - 0.75em);
-  }
+  @include row(0.75em, 50%);
+  align-items: center;
 
   @media (min-width: $media-sm) {
-    flex-wrap: nowrap;
-
-    > * {
-      flex: 0 1 25%;
+    li {
+      flex-basis: 25%;
     }
   }
 }
 
-ul.footer-grid {
-  row-gap: calc(var(--site-margin) * 2);
+.footer-link-list {
+  @include col;
 }
 
-.footer-logo-wrapper,
-.footer-link-list,
-.footer-info {
-  @media (min-width: $media-xxs) {
-    padding-right: 0.75em;
-  }
-}
+.footer-info-list {
+  @include col;
 
-.footer-link-list li + li,
-.footer-info:last-child {
-  margin-top: 0.75em;
-}
-
-.footer-info:last-child {
   @media (min-width: $media-sm) {
-    margin-top: 0;
-  }
-}
-
-.footer-logo-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  @media (min-width: $media-xxs) {
-    justify-content: flex-start;
+    @include row(0.75em, 25%);
   }
 }
 
 .footer-logo {
   width: 100%;
-  max-width: clamp(90px, calc(90vw / (var(--media-xxs) / 100)), 120px);
+  max-width: clamp(100px, calc(100vw / (var(--media-sm) / 100)), 140px);
 }

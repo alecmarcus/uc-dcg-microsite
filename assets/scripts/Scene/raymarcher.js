@@ -5,7 +5,7 @@ import fragmentURL from "url:./fragment.glsl";
 const RayMarcher = (function () {
   const tl = new THREE.TextureLoader();
   const cl = new THREE.CubeTextureLoader();
-  const mouse = new THREE.Vector2();
+  const mouse = new THREE.Vector3();
 
   function RayMarcher(distance, precision) {
     this.distance = distance || 50;
@@ -80,7 +80,7 @@ const RayMarcher = (function () {
           type: "v2",
           value: this.resolution,
         },
-        mouse: { type: "v2", value: mouse },
+        mouse: { type: "v3", value: mouse },
         time: { type: "f", value: 0 },
         randomSeed: { type: "f", value: Math.random() },
         fov: { type: "f", value: 45 },

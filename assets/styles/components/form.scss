@@ -3,7 +3,8 @@
   --fw: var(--fw-4);
 
   font-size: var(--fs);
-  max-width: 28ch;
+  max-width: 25.75ch;
+  position: relative;
 }
 
 #data-form {
@@ -16,12 +17,20 @@
   }
 
   &.submitted {
-    display: none;
+    animation: fade var(--dur-05) var(--expo-in) var(--dur-02) reverse both;
 
-    + .confirmation {
-      display: block;
+    &.removed {
+      display: none;
+
+      + .confirmation {
+        display: block;
+      }
     }
   }
+}
+
+.confirmation {
+  animation: fade var(--dur-75) var(--expo-out) both;
 }
 
 .form-title {
@@ -47,7 +56,7 @@
     color: var(--text);
   }
 
-  &:focus-visible {
+  &.focus-visible {
     color: var(--text);
   }
 
@@ -68,19 +77,21 @@
   --fs: var(--fs-3);
   --fw: var(--fw-6);
 
+  align-items: center;
+  background: var(--text);
   border-radius: 4px;
   border: 1px solid var(--text);
   cursor: pointer;
   display: flex;
-  align-items: center;
   justify-content: space-between;
   margin-top: 0.5em;
   overflow: hidden;
   padding: 0.5em 0.75em;
   position: relative;
-  transition: color var(--t-to);
+  transition: color var(--t-to), background-color var(--t-to),
+    border-color var(--t-to), transform var(--t-to);
   width: 100%;
-  background: var(--text);
+  z-index: 20;
 
   span {
     color: var(--back);
@@ -88,29 +99,25 @@
     z-index: 100;
   }
 
-  &::after {
-    background: var(--back);
-    bottom: 0;
-    content: "";
-    display: block;
-    flex: none;
-    left: 0;
-    background-blend-mode: difference;
-    position: absolute;
-    top: 100%;
-    transform-origin: bottom left;
-    transition: top var(--t-to);
-    width: 100%;
-  }
-
-  &:hover,
-  &:focus-visible {
-    span {
-      mix-blend-mode: difference;
+  &:not(:disabled) {
+    + #form-disabled-tooltip {
+      display: none;
     }
 
-    &::after {
-      top: 0;
+    &:hover {
+      transform: scale(1.0075);
+    }
+
+    &.focus-visible {
+      background-color: var(--back);
+
+      span {
+        color: var(--text);
+      }
+    }
+
+    &:active {
+      animation: bounce var(--dur-75) cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
     }
   }
 
@@ -118,6 +125,36 @@
     background-color: var(--disabled);
     border-color: var(--disabled);
     color: var(--back);
-    pointer-events: none;
+    cursor: not-allowed;
+
+    &:hover {
+      animation: shake var(--dur-75) cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
+      perspective: 1000px;
+
+      + #form-disabled-tooltip {
+        opacity: 1;
+        transform: translate(-50%, 8px);
+      }
+    }
   }
+}
+
+#form-disabled-tooltip {
+  --fs: var(--fs-1);
+  --fw: var(--fw-4);
+
+  border-radius: 2px;
+  display: inline-block;
+  left: 50%;
+  opacity: 0;
+  padding: 0.5em 1em;
+  position: absolute;
+  text-align: center;
+  top: 100%;
+  transform: translate(-50%, -100%);
+  transition: opacity var(--t-to), transform var(--t-to);
+  width: max-content;
+  z-index: 10;
 }

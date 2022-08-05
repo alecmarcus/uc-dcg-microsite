@@ -1,7 +1,7 @@
 uniform vec2 resolution;
 uniform float time;
-uniform vec2 mouse;
-uniform sampler2D map;
+uniform vec3 mouse;
+// uniform sampler2D map;
 
 // uses most of the StackGL methods
 // https://github.com/stackgl
@@ -35,6 +35,8 @@ vec3 getRay(vec3 origin, vec3 target, vec2 screenPos, float lensLength) {
 }
 
 /////////////////////////////////////////////////////////////////////////
+
+//  og
 
 mat3 rotationMatrix3(vec3 axis, float angle) {
   axis = normalize(axis);
@@ -135,7 +137,19 @@ vec2 field(vec3 position) {
   vec3 zero = vec3(0.0);
 
   // rotation
-  vec4 quat = vec4(1.0, sin(time) * 0.1, 0.0, time * 0.2);
+  float mouseDamping = 0.275;
+
+  float mouseX = (mouse.x * mouseDamping);
+  float mouseY = (mouse.y * mouseDamping);
+  float mouseD = (mouse.z * (mouseDamping * mouseDamping * mouseDamping * mouseDamping * mouseDamping * mouseDamping));
+
+  float mouseXT = mouseX + time * 0.15;
+  float mouseYT = mouseY + time * 0.15;
+  float mouseDT = mouseD + time * 0.15;
+
+  vec4 mouseQuat = vec4(1.0, sin(mouseDT) * 0.1, 0.0, (mouseDT) * 0.2);
+
+  vec4 quat = vec4(1.0, sin(time * 0.15) * 0.1, 0.0, time * 0.15);
 
   // noise
   vec3 noise = position * 0.25;
@@ -143,13 +157,15 @@ vec2 field(vec3 position) {
   noise += time * 0.1;
   float pnoise = 1.0 + perlin(noise);
 
-  vec2 torus1 = torus(position, vec2(4.5, 0.7), vec3(8.0, 6.0, 0.0), (quat + 2.5) * 0.8);
-  vec2 torus2 = torus(position, vec2(4.5, 0.7), vec3(8.0, 0.0, 0.0), vec4(5.0 + mouse.x, mouse.x, time, time));
-  vec2 torus3 = torus(position, vec2(4.5, 0.7), vec3(8.0, -6.0, 0.0), (quat + 1.0) * 0.8);
+  float xBase = (resolution.x / 800.0) + 2.5;
 
-  vec2 cube1 = roundBox(position, vec3(1.5), 0.5, vec3(8.0, 6.0, 0.0), quat);
-  vec2 cube2 = roundBox(position, vec3(1.5), 0.5, vec3(8.0, 0.0, 0.0), quat);
-  vec2 cube3 = roundBox(position, vec3(1.5), 0.5, vec3(8.0, -6.0, 0.0), quat);
+  vec2 torus1 = torus(position, vec2(4.5, 0.7), vec3(xBase, 6.0, 0.0), (quat + 2.5) * 0.8);
+  vec2 torus2 = torus(position, vec2(4.5, 0.7), vec3(xBase, 0.0, 0.0), vec4(1.0 + mouseY, 3.0, 1.0 + mouseX, mouseDT));
+  vec2 torus3 = torus(position, vec2(4.5, 0.7), vec3(xBase, -6.0, 0.0), (quat + 1.0) * 0.8);
+
+  vec2 cube1 = roundBox(position, vec3(1.5), 0.5, vec3(xBase + 2.0, 6.0, 0.0), quat);
+  vec2 cube2 = roundBox(position, vec3(1.5), 0.5, vec3(xBase, 0.0, 0.0), quat);
+  vec2 cube3 = roundBox(position, vec3(1.5), 0.5, vec3(xBase - 2.0, -6.0, 0.0), quat);
 
   vec2 fig1 = cube1;
   vec2 fig2 = torus2;

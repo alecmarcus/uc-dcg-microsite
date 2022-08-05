@@ -23,12 +23,13 @@
   --media-sm: #{strip-unit($media-sm)};
   --media-md: #{strip-unit($media-md)};
   --media-lg: #{strip-unit($media-lg)};
+  --media-xl: #{strip-unit($media-xl)};
 
   --ff-sans: "Roobert";
   --ff-serif: "Signifier";
 
-  --fs-1: clamp(14px, calc(14vw / (var(--media-xxs) / 100)), 16px);
-  --fs-2: clamp(14px, calc(14vw / (var(--media-xxs) / 100)), 18px);
+  --fs-1: clamp(12px, calc(14vw / (var(--media-xxs) / 100)), 15px);
+  --fs-2: clamp(14px, calc(14vw / (var(--media-xxs) / 100)), 17px);
   --fs-3: clamp(22px, calc(20vw / (var(--media-xxs) / 100)), 24px);
   --fs-4: clamp(28px, calc(28vw / (var(--media-xxs) / 100)), 56px);
   --fs-5: clamp(54px, calc(54vw / (var(--media-xxs) / 100)), 120px);
@@ -86,19 +87,35 @@ body {
 }
 
 .dark {
-  --text: var(--text-white);
   --back: var(--navy);
-  --secondary: var(--navy-gray-dark);
   --disabled: var(--navy-gray-light);
+  --secondary: var(--navy-gray-dark);
+  --text: var(--text-white);
   color-scheme: dark;
 }
 
-.light {
-  --text: var(--text-black);
-  --back: var(--beige);
-  --secondary: var(--beige-gray-dark);
-  --disabled: var(--beige-gray-light);
+.dark-inverted {
+  --back: var(--text-white);
+  --disabled: var(--navy-gray-dark);
+  --secondary: var(--navy-gray-light);
+  --text: var(--navy);
   color-scheme: light;
+}
+
+.light {
+  --back: var(--beige);
+  --disabled: var(--beige-gray-light);
+  --secondary: var(--beige-gray-dark);
+  --text: var(--text-black);
+  color-scheme: light;
+}
+
+.light-inverted {
+  --back: var(--text-black);
+  --disabled: var(--beige-gray-dark);
+  --secondary: var(--beige-gray-light);
+  --text: var(--beige);
+  color-scheme: dark;
 }
 
 /*
@@ -146,4 +163,8 @@ body {
   position: absolute !important;
   width: 1px !important;
   white-space: nowrap !important;
+}
+
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
 }

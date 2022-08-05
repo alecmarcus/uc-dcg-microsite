@@ -21,6 +21,22 @@
   justify-content: center;
   position: relative;
 
+  .header-wrapper:not(:focus-within) & {
+    &:hover {
+      .tooltip {
+        opacity: 1;
+        top: 2em;
+      }
+    }
+  }
+
+  &.focus-visible {
+    .tooltip {
+      opacity: 1;
+      top: 2em;
+    }
+  }
+
   .header-item-icon & {
     width: 1.75em;
   }
@@ -41,7 +57,7 @@
     }
   }
 
-  &:focus-visible {
+  &.focus-visible {
     background: var(--text);
 
     svg {
@@ -63,12 +79,6 @@
   top: 2.75em;
   transition: top var(--t-to);
   width: max-content;
-
-  .header-link:hover &,
-  .header-link:focus-visible & {
-    opacity: 1;
-    top: 2em;
-  }
 }
 
 .header-item-logo {

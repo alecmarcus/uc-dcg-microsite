@@ -1,3 +1,5 @@
+import "focus-visible";
+
 import { onDocumentReady } from "./utils";
 import HeroText from "./HeroText";
 import EmailForm from "./EmailForm";

@@ -2,12 +2,5 @@ $media-xxs: 400px;
 $media-xs: 640px;
 $media-sm: 768px;
 $media-md: 1024px;
-$media-lg: 1400px;
-
-$media: (
-  "xxs": $media-xxs,
-  "xs": $media-xs,
-  "sm": $media-sm,
-  "md": $media-md,
-  "lg": $media-lg,
-);
+$media-lg: 1200px;
+$media-xl: 1400px;
