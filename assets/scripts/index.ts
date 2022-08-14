@@ -1,6 +1,7 @@
 import "focus-visible";
 
-import { mobileAndTabletCheck, onDocumentReady } from "./utils";
+import { isMobileOrTablet, onDocumentReady } from "./utils";
+import Cookies from "./Cookies";
 import HeroText from "./HeroText";
 import EmailForm from "./EmailForm";
 
@@ -8,7 +9,9 @@ import EmailForm from "./EmailForm";
 import Scene from "./Scene/index.js";
 
 onDocumentReady(() => {
-  if (!mobileAndTabletCheck()) {
+  new Cookies();
+
+  if (isMobileOrTablet() === false) {
     new Scene();
   }
 

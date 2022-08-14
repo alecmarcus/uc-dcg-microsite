@@ -6,7 +6,7 @@ export const onDocumentReady = (callback: () => void) => {
   }
 };
 
-export const mobileAndTabletCheck = (): boolean => {
+export const isMobileOrTablet = (): boolean => {
   let check = false;
   (function (a) {
     if (

@@ -1,0 +1,72 @@
+#cookie-policy-wrapper {
+  --fs: var(--fs-0);
+  --lh: var(--lh-2);
+
+  bottom: 0;
+  display: block;
+  left: 0;
+  opacity: 1;
+  padding: var(--site-margin);
+  position: fixed;
+  right: 0;
+  visibility: visible;
+  width: 100%;
+  z-index: 9999;
+  pointer-events: none;
+
+  &.accepted {
+    transition: visibility 0s linear var(--dur-03), opacity var(--t-to);
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+.cookie-policy-content {
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  margin-left: auto;
+  max-width: 80ch;
+  padding: 1.5em;
+  width: 100%;
+  box-shadow: 0px 6px 12px -6px var(--disabled);
+
+  @media (min-width: $media-sm) {
+    align-items: stretch;
+    flex-direction: row;
+  }
+
+  a {
+    color: var(--secondary);
+    pointer-events: all;
+    text-decoration-thickness: 1px;
+    text-decoration: underline;
+    transition: color var(--t-to);
+
+    &:hover,
+    &.focus-visible,
+    &:focus {
+      color: var(--text);
+    }
+  }
+}
+
+.btn-accept-cookies {
+  --fw: var(--fw-6);
+
+  border-radius: 2px;
+  border: 1px solid var(--back);
+  cursor: pointer;
+  padding: 1em 2em;
+  pointer-events: all;
+  text-align: center;
+  transition: color var(--t-to), background var(--t-to);
+
+  &:hover,
+  &:focus,
+  &.focus-visible {
+    color: var(--back);
+    background: var(--text);
+  }
+}

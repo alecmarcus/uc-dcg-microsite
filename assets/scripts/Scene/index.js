@@ -1,7 +1,18 @@
 import * as THREE from "three";
 import RayMarcher from "./raymarcher";
 
-const { abs, sqrt, pow, min, max, ceil } = Math;
+const { abs, sqrt, pow, min, max, ceil, round } = Math;
+const { EPSILON } = Number;
+
+const hexToVec3 = h => {
+  const c = [
+    round(((("0x" + h[1] + h[2]) | 0) / 255 + EPSILON) * 100) / 100,
+    round(((("0x" + h[3] + h[4]) | 0) / 255 + EPSILON) * 100) / 100,
+    round(((("0x" + h[5] + h[6]) | 0) / 255 + EPSILON) * 100) / 100,
+  ];
+
+  return new THREE.Vector3(c[0], c[1], c[2]);
+};
 
 const easeOut = x => (x === 1 ? 1 : 1 - pow(2, -10 * x));
 
@@ -24,6 +35,12 @@ class Scene {
     this.rm = new RayMarcher();
     this.rm.loadFragmentShader(() => this.animate());
     document.getElementById("root").appendChild(this.rm.domElement);
+  }
+
+  get baseColor() {
+    return hexToVec3(
+      getComputedStyle(document.body).getPropertyValue("--back").trim(),
+    );
   }
 
   mouseEvents() {
@@ -113,6 +130,7 @@ class Scene {
   animate() {
     this.rm.render();
     this.rm.getUniform("mouse").value = this.mouse;
+    this.rm.getUniform("baseColor").value = this.baseColor;
     requestAnimationFrame(() => this.animate());
   }
 }

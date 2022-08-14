@@ -51,9 +51,13 @@
   --fs: var(--fs-2);
   --fw: var(--fw-3);
 
-  column-count: 2;
   hyphens: auto;
   max-width: 90ch;
+  text-indent: 2em;
+
+  @media (min-width: $media-sm) {
+    column-count: 2;
+  }
 }
 
 canvas {

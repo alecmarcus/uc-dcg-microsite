@@ -85,6 +85,20 @@
   margin-right: auto;
 }
 
+.header-logo-lg {
+  display: none;
+
+  @media (min-width: $media-xs) {
+    display: block;
+  }
+}
+
+.header-logo-sm {
+  @media (min-width: $media-xs) {
+    display: none;
+  }
+}
+
 .header-item-search {
   margin-right: 0.5em;
 }

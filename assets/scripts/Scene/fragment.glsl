@@ -1,6 +1,7 @@
 uniform vec2 resolution;
 uniform float time;
 uniform vec3 mouse;
+uniform vec3 baseColor;
 // uniform sampler2D map;
 
 // uses most of the StackGL methods
@@ -267,8 +268,9 @@ vec3 rimlight(vec3 pos, vec3 nor) {
 
 void main() {
 
-  vec3 color0 = vec3(0.89, 0.87, 0.82);
-  vec3 color1 = vec3(0.67, 0.65, 0.61);
+  vec3 color0 = baseColor;
+  // vec3 color0 = vec3(0.89, 0.87, 0.82);
+  // vec3 color1 = vec3(0.67, 0.65, 0.61);
 
   // Background color
   // vec2 xy = gl_FragCoord.xy / resolution;
@@ -309,7 +311,8 @@ void main() {
     // vec3 lig1 = normalize(vec3(0.5, -0.75, 0.5));
     // vec3 light1 = max(0.0, dot(lig1, nor)) * color1;
 
-    vec3 lightColor = color0 * 0.025;
+    // vec3 lightColor = color0 * 0.025 + ((color0.x + color0.y + color0.x) / 6.0);
+    vec3 lightColor = color0 * (1.0 / (color0.x + color0.y + color0.x) / 15.0);
     vec3 lightPos = vec3(0.0, 1.0, 2.0);
     vec3 light = max(0.0, dot(lightPos, nor)) * lightColor;
 

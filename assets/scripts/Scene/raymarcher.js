@@ -6,6 +6,7 @@ const RayMarcher = (function () {
   const tl = new THREE.TextureLoader();
   const cl = new THREE.CubeTextureLoader();
   const mouse = new THREE.Vector3();
+  const baseColor = new THREE.Vector3();
 
   function RayMarcher(distance, precision) {
     this.distance = distance || 50;
@@ -81,6 +82,7 @@ const RayMarcher = (function () {
           value: this.resolution,
         },
         mouse: { type: "v3", value: mouse },
+        baseColor: { type: "v3", value: baseColor },
         time: { type: "f", value: 0 },
         randomSeed: { type: "f", value: Math.random() },
         fov: { type: "f", value: 45 },

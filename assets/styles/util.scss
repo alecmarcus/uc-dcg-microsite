@@ -11,11 +11,11 @@
   --text-black: hsl(222, 14%, 10%);
 
   --beige: hsl(41, 22%, 86%);
-  --beige-gray-dark: hsl(41, 6%, 45%);
+  --beige-gray-dark: hsl(41, 6%, 35%);
   --beige-gray-light: hsl(41, 8%, 70%);
 
   --navy: hsl(222, 100%, 9%);
-  --navy-gray-dark: hsl(222, 8%, 34%);
+  --navy-gray-dark: hsl(222, 8%, 35%);
   --navy-gray-light: hsl(222, 8%, 64%);
 
   --media-xxs: #{strip-unit($media-xxs)};
@@ -28,6 +28,7 @@
   --ff-sans: "Roobert";
   --ff-serif: "Signifier";
 
+  --fs-0: 13px;
   --fs-1: clamp(12px, calc(14vw / (var(--media-xxs) / 100)), 15px);
   --fs-2: clamp(14px, calc(14vw / (var(--media-xxs) / 100)), 17px);
   --fs-3: clamp(22px, calc(20vw / (var(--media-xxs) / 100)), 24px);
@@ -86,7 +87,7 @@ body {
   --fw: var(--fw-1);
 }
 
-.dark {
+@mixin dark {
   --back: var(--navy);
   --disabled: var(--navy-gray-light);
   --secondary: var(--navy-gray-dark);
@@ -94,7 +95,7 @@ body {
   color-scheme: dark;
 }
 
-.dark-inverted {
+@mixin dark-inverted {
   --back: var(--text-white);
   --disabled: var(--navy-gray-dark);
   --secondary: var(--navy-gray-light);
@@ -102,7 +103,7 @@ body {
   color-scheme: light;
 }
 
-.light {
+@mixin light {
   --back: var(--beige);
   --disabled: var(--beige-gray-light);
   --secondary: var(--beige-gray-dark);
@@ -110,12 +111,32 @@ body {
   color-scheme: light;
 }
 
-.light-inverted {
+@mixin light-inverted {
   --back: var(--text-black);
   --disabled: var(--beige-gray-dark);
   --secondary: var(--beige-gray-light);
   --text: var(--beige);
   color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  .theme-base {
+    @include light;
+  }
+
+  .theme-inverted {
+    @include light-inverted;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .theme-base {
+    @include light-inverted;
+  }
+
+  .theme-inverted {
+    @include light;
+  }
 }
 
 /*
@@ -165,6 +186,7 @@ body {
   white-space: nowrap !important;
 }
 
+// For the focus-visible polyfill. Hides outlines on elements that got focus via mouse interaction.
 .js-focus-visible :focus:not(.focus-visible) {
   outline: none;
 }

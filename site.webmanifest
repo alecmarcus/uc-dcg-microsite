@@ -1,0 +1,13 @@
+{
+  "name": "SITENAME",
+  "short_name": "SHORTNAME",
+  "icons": [
+    {
+      "src": "assets/img/google-touch-icon.png",
+      "sizes": "512x512"
+    }
+  ],
+  "background_color": "#16181d",
+  "theme_color": "#e3ded3",
+  "display": "fullscreen"
+}
