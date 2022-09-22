@@ -35,11 +35,13 @@
     overflow: hidden;
     padding: 0 0.05em 0.25em;
     position: relative;
+    transform: translate3d(0, 0, 0);
   }
 
   .letter {
     display: inline-block;
     transform: translateY(1.25em);
+    will-change: transform;
   }
 }
 
