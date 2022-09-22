@@ -29,11 +29,11 @@
   --ff-serif: "Signifier";
 
   --fs-0: 13px;
-  --fs-1: clamp(12px, calc(14vw / (var(--media-xxs) / 100)), 15px);
-  --fs-2: clamp(14px, calc(14vw / (var(--media-xxs) / 100)), 17px);
-  --fs-3: clamp(22px, calc(20vw / (var(--media-xxs) / 100)), 24px);
-  --fs-4: clamp(28px, calc(28vw / (var(--media-xxs) / 100)), 56px);
-  --fs-5: clamp(54px, calc(54vw / (var(--media-xxs) / 100)), 120px);
+  --fs-1: 16px;
+  --fs-2: 18px;
+  --fs-3: 26px;
+  --fs-4: 32px;
+  --fs-5: 58px;
 
   --fw-1: 100;
   --fw-2: 200;
@@ -45,6 +45,7 @@
 
   --lh-1: 1.03;
   --lh-2: 1.3;
+  --lh-3: 1.4;
 
   --site-margin: clamp(20px, calc(18vw / (var(--media-xs) / 100)), 64px);
   --section-space: clamp(150px, calc(120vw / (var(--media-xs) / 100)), 200px);
@@ -61,6 +62,16 @@
   --dur-10: 1s;
   --t-to: var(--dur-03) var(--expo-out);
   --t-from: var(--dur-03) var(--expo-in);
+}
+
+@media (min-width: $media-xxs) {
+  :root {
+    --fs-1: clamp(12px, calc(14vw / (var(--media-xxs) / 100)), 15px);
+    --fs-2: clamp(14px, calc(14vw / (var(--media-xxs) / 100)), 17px);
+    --fs-3: clamp(22px, calc(20vw / (var(--media-xxs) / 100)), 24px);
+    --fs-4: clamp(28px, calc(28vw / (var(--media-xxs) / 100)), 56px);
+    --fs-5: clamp(54px, calc(54vw / (var(--media-xxs) / 100)), 120px);
+  }
 }
 
 /*

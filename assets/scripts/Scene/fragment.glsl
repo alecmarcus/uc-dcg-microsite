@@ -164,9 +164,9 @@ vec2 field(vec3 position) {
   vec2 torus2 = torus(position, vec2(4.5, 0.7), vec3(xBase, 0.0, 0.0), vec4(1.0 + mouseY, 3.0, 1.0 + mouseX, mouseDT));
   vec2 torus3 = torus(position, vec2(4.5, 0.7), vec3(xBase, -6.0, 0.0), (quat + 1.0) * 0.8);
 
-  vec2 cube1 = roundBox(position, vec3(1.5), 0.5, vec3(xBase + 2.0, 6.0, 0.0), quat);
+  vec2 cube1 = roundBox(position, vec3(1.5), 0.5, vec3(xBase - 2.0, 6.0, 0.0), quat);
   vec2 cube2 = roundBox(position, vec3(1.5), 0.5, vec3(xBase, 0.0, 0.0), quat);
-  vec2 cube3 = roundBox(position, vec3(1.5), 0.5, vec3(xBase - 2.0, -6.0, 0.0), quat);
+  vec2 cube3 = roundBox(position, vec3(1.5), 0.5, vec3(xBase + 2.0, -6.0, 0.0), quat);
 
   vec2 fig1 = cube1;
   vec2 fig2 = torus2;

@@ -8,15 +8,18 @@
   --lh: var(--lh-1);
 
   letter-spacing: -0.04em;
-  margin-bottom: 1.25em;
-  margin-top: 1.25em;
+  margin-bottom: 0.25em;
+  margin-top: 1em;
   min-height: calc(var(--fs) * var(--lh) * 3);
   position: relative;
   z-index: -200;
 
-  @media (min-width: $media-sm) {
-    margin-bottom: 1em;
-    margin-top: 1em;
+  @media (min-width: $media-xs) {
+    align-items: flex-end;
+    display: flex;
+    height: calc(100vh - var(--fs));
+    margin-bottom: 0.5em;
+    margin-top: 0;
   }
 }
 
@@ -52,12 +55,13 @@
 .overview {
   --fs: var(--fs-2);
   --fw: var(--fw-3);
+  --lh: var(--lh-3);
 
   hyphens: auto;
   max-width: 90ch;
   text-indent: 2em;
 
-  @media (min-width: $media-sm) {
+  @media (min-width: $media-xs) {
     column-count: 2;
   }
 }
@@ -67,4 +71,8 @@ canvas {
   inset: 0;
   position: fixed;
   z-index: -100;
+
+  @media (max-width: $media-xs) {
+    display: none !important;
+  }
 }
