@@ -25,7 +25,6 @@ const RayMarcher = (function () {
 
     this.width = window.innerWidth;
     this.height = window.innerHeight;
-    this.renderer.setPixelRatio(window.devicePixelRatio);
     this.resolution = new THREE.Vector2(this.width, this.height);
     this.setSize(this.width, window.innerHeight);
 
@@ -183,10 +182,8 @@ const RayMarcher = (function () {
 
     if (this.material == null) return;
 
-    this.material.uniforms.resolution.value.x =
-      this.width * window.devicePixelRatio;
-    this.material.uniforms.resolution.value.y =
-      this.height * window.devicePixelRatio;
+    this.material.uniforms.resolution.value.x = this.width;
+    this.material.uniforms.resolution.value.y = this.height;
 
     this.material.uniforms.time.value = (Date.now() - this.startTime) * 0.001;
     this.material.uniforms.randomSeed.value = Math.random();
