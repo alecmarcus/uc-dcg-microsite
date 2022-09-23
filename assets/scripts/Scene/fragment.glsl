@@ -52,11 +52,11 @@ mat3 rotationMatrix3(vec3 axis, float angle) {
 
 // primitives
 
-vec2 sphere(vec3 p, float radius, vec3 pos, vec4 quat) {
-  mat3 transform = rotationMatrix3(quat.xyz, quat.w);
-  float d = length((p * transform) - pos) - radius;
-  return vec2(d, 1);
-}
+// vec2 sphere(vec3 p, float radius, vec3 pos, vec4 quat) {
+//   mat3 transform = rotationMatrix3(quat.xyz, quat.w);
+//   float d = length((p * transform) - pos) - radius;
+//   return vec2(d, 1);
+// }
 
 vec2 roundBox(vec3 p, vec3 size, float corner, vec3 pos, vec4 quat) {
   mat3 transform = rotationMatrix3(quat.xyz, quat.w);
@@ -70,34 +70,34 @@ vec2 torus(vec3 p, vec2 radii, vec3 pos, vec4 quat) {
   return vec2(d, 1.0);
 }
 
-vec2 cone(vec3 p, vec2 c, vec3 pos, vec4 quat) {
-  mat3 transform = rotationMatrix3(quat.xyz, quat.w);
-  vec3 pp = (p - pos) * transform;
-  float q = length(pp.xy);
-  return vec2(dot(c, vec2(q, pp.z)), 1.0);
-}
+// vec2 cone(vec3 p, vec2 c, vec3 pos, vec4 quat) {
+//   mat3 transform = rotationMatrix3(quat.xyz, quat.w);
+//   vec3 pp = (p - pos) * transform;
+//   float q = length(pp.xy);
+//   return vec2(dot(c, vec2(q, pp.z)), 1.0);
+// }
 
-// http://www.pouet.net/topic.php?post=365312
-vec2 cylinder(vec3 p, float h, float r, vec3 pos, vec4 quat) {
-  mat3 transform = rotationMatrix3(quat.xyz, quat.w);
-  vec3 pp = (p - pos) * transform;
-  return vec2(max(length(pp.xz) - r, abs(pp.y) - h), 1.0);
-}
+// // http://www.pouet.net/topic.php?post=365312
+// vec2 cylinder(vec3 p, float h, float r, vec3 pos, vec4 quat) {
+//   mat3 transform = rotationMatrix3(quat.xyz, quat.w);
+//   vec3 pp = (p - pos) * transform;
+//   return vec2(max(length(pp.xz) - r, abs(pp.y) - h), 1.0);
+// }
 
 // operations
 
-vec2 unionAB(vec2 a, vec2 b) {
-  return vec2(min(a.x, b.x), 1.0);
-}
-vec2 intersectionAB(vec2 a, vec2 b) {
-  return vec2(max(a.x, b.x), 1.0);
-}
-vec2 blendAB(vec2 a, vec2 b, float t) {
-  return vec2(mix(a.x, b.x, t), 1.0);
-}
-vec2 subtract(vec2 a, vec2 b) {
-  return vec2(max(-a.x, b.x), 1.0);
-}
+// vec2 unionAB(vec2 a, vec2 b) {
+//   return vec2(min(a.x, b.x), 1.0);
+// }
+// vec2 intersectionAB(vec2 a, vec2 b) {
+//   return vec2(max(a.x, b.x), 1.0);
+// }
+// vec2 blendAB(vec2 a, vec2 b, float t) {
+//   return vec2(mix(a.x, b.x, t), 1.0);
+// }
+// vec2 subtract(vec2 a, vec2 b) {
+//   return vec2(max(-a.x, b.x), 1.0);
+// }
 
 // http://iquilezles.org/www/articles/smin/smin.htm
 vec2 smin(vec2 a, vec2 b, float k) {
@@ -129,13 +129,13 @@ float perlin(vec3 p) {
 /////////////////////////////////////////////////////////////////////////
 
 const int steps = 50;
-const int shadowSteps = 4;
-const int ambienOcclusionSteps = 20;
-const float PI = 3.14159;
+// const int shadowSteps = 4;
+// const int ambienOcclusionSteps = 20;
+// const float PI = 3.14159;
 vec2 field(vec3 position) {
 
   // position
-  vec3 zero = vec3(0.0);
+  // vec3 zero = vec3(0.0);
 
   // rotation
   float mouseDamping = 0.275;
@@ -144,11 +144,11 @@ vec2 field(vec3 position) {
   float mouseY = (mouse.y * mouseDamping);
   float mouseD = (mouse.z * (mouseDamping * mouseDamping * mouseDamping * mouseDamping * mouseDamping * mouseDamping));
 
-  float mouseXT = mouseX + time * 0.15;
-  float mouseYT = mouseY + time * 0.15;
+  // float mouseXT = mouseX + time * 0.15;
+//   float mouseYT = mouseY + time * 0.15;
   float mouseDT = mouseD + time * 0.15;
 
-  vec4 mouseQuat = vec4(1.0, sin(mouseDT) * 0.1, 0.0, (mouseDT) * 0.2);
+  // vec4 mouseQuat = vec4(1.0, sin(mouseDT) * 0.1, 0.0, (mouseDT) * 0.2);
 
   vec4 quat = vec4(1.0, sin(time * 0.15) * 0.1, 0.0, time * 0.15);
 
@@ -160,12 +160,12 @@ vec2 field(vec3 position) {
 
   float xBase = (resolution.x / 800.0) + 2.5;
 
-  vec2 torus1 = torus(position, vec2(4.5, 0.7), vec3(xBase, 6.0, 0.0), (quat + 2.5) * 0.8);
+  // vec2 torus1 = torus(position, vec2(4.5, 0.7), vec3(xBase, 6.0, 0.0), (quat + 2.5) * 0.8);
   vec2 torus2 = torus(position, vec2(4.5, 0.7), vec3(xBase, 0.0, 0.0), vec4(1.0 + mouseY, 3.0, 1.0 + mouseX, mouseDT));
-  vec2 torus3 = torus(position, vec2(4.5, 0.7), vec3(xBase, -6.0, 0.0), (quat + 1.0) * 0.8);
+  // vec2 torus3 = torus(position, vec2(4.5, 0.7), vec3(xBase, -6.0, 0.0), (quat + 1.0) * 0.8);
 
   vec2 cube1 = roundBox(position, vec3(1.5), 0.5, vec3(xBase - 2.0, 6.0, 0.0), quat);
-  vec2 cube2 = roundBox(position, vec3(1.5), 0.5, vec3(xBase, 0.0, 0.0), quat);
+  // vec2 cube2 = roundBox(position, vec3(1.5), 0.5, vec3(xBase, 0.0, 0.0), quat);
   vec2 cube3 = roundBox(position, vec3(1.5), 0.5, vec3(xBase + 2.0, -6.0, 0.0), quat);
 
   vec2 fig1 = cube1;
@@ -229,42 +229,42 @@ vec3 calcNormal(vec3 pos) {
 
 // https://www.shadertoy.com/view/Xds3zN
 
-float softshadow(in vec3 ro, in vec3 rd, in float mint, in float tmax, in float K) {
-  float res = 1.0;
-  float t = mint;
-  for(int i = 0; i < shadowSteps; i++) {
-    float h = field(ro + rd * t).x;
-    res = min(res, K * h / t);
-    t += clamp(h, 0.02, 0.10);
-    if(h < 0.001 || t > tmax)
-      break;
-  }
+// float softshadow(in vec3 ro, in vec3 rd, in float mint, in float tmax, in float K) {
+//   float res = 1.0;
+//   float t = mint;
+//   for(int i = 0; i < shadowSteps; i++) {
+//     float h = field(ro + rd * t).x;
+//     res = min(res, K * h / t);
+//     t += clamp(h, 0.02, 0.10);
+//     if(h < 0.001 || t > tmax)
+//       break;
+//   }
 
-  return clamp(res, 0.0, 1.0);
-}
+//   return clamp(res, 0.0, 1.0);
+// }
 
-float calcAO(in vec3 pos, in vec3 nor) {
+// float calcAO(in vec3 pos, in vec3 nor) {
 
-  float occ = 0.0;
-  float sca = 1.0;
+//   float occ = 0.0;
+//   float sca = 1.0;
 
-  for(int i = 0; i < ambienOcclusionSteps; i++) {
-    float hr = 0.01 + 0.12 * float(i) / float(ambienOcclusionSteps);
-    vec3 aopos = nor * hr + pos;
-    float dd = field(aopos).x;
-    occ += -(dd - hr) * sca;
-    sca *= 0.95;
-  }
+//   for(int i = 0; i < ambienOcclusionSteps; i++) {
+//     float hr = 0.01 + 0.12 * float(i) / float(ambienOcclusionSteps);
+//     vec3 aopos = nor * hr + pos;
+//     float dd = field(aopos).x;
+//     occ += -(dd - hr) * sca;
+//     sca *= 0.95;
+//   }
 
-  return clamp(1.0 - 3.0 * occ, 0.0, 1.0);
-}
+//   return clamp(1.0 - 3.0 * occ, 0.0, 1.0);
+// }
 
-vec3 rimlight(vec3 pos, vec3 nor) {
-  vec3 v = normalize(-pos);
-  float vdn = 1.0 - max(dot(v, nor), 0.0);
+// vec3 rimlight(vec3 pos, vec3 nor) {
+//   vec3 v = normalize(-pos);
+//   float vdn = 1.0 - max(dot(v, nor), 0.0);
 
-  return vec3(smoothstep(0.0, 1.0, vdn));
-}
+//   return vec3(smoothstep(0.0, 1.0, vdn));
+// }
 
 void main() {
 
