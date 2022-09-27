@@ -147,7 +147,6 @@ class RayMarcher {
 
     if (this.resolution) {
       this.resolution.set(this.width, this.height);
-      console.log(this.resolution);
     } else {
       this.resolution = new THREE.Vector2(this.width, this.height);
     }
