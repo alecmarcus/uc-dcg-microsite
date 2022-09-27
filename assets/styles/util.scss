@@ -70,7 +70,11 @@
     --fs-2: clamp(14px, calc(14vw / (var(--media-xxs) / 100)), 17px);
     --fs-3: clamp(22px, calc(20vw / (var(--media-xxs) / 100)), 24px);
     --fs-4: clamp(28px, calc(28vw / (var(--media-xxs) / 100)), 56px);
-    --fs-5: clamp(54px, calc(54vw / (var(--media-xxs) / 100)), 18vmin);
+    --fs-5: clamp(
+      54px,
+      calc(54vw / (var(--media-xxs) / 100)),
+      calc(80px + 4vmax)
+    );
   }
 }
 

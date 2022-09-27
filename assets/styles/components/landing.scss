@@ -8,17 +8,23 @@
   --lh: var(--lh-1);
 
   letter-spacing: -0.04em;
-  margin-bottom: 0.25em;
+  margin-bottom: 0.33em;
   margin-top: 1em;
   min-height: calc(var(--fs) * var(--lh) * 3);
   position: relative;
-  z-index: -200;
 
   @media (min-width: $media-xs) {
     align-items: flex-end;
     display: flex;
-    height: calc(100vmin - var(--fs));
+    height: max(
+      4em,
+      calc(100vh - (2 * var(--site-margin)) - (1.75 * var(--fs-2)))
+    );
     margin-top: 0;
+  }
+
+  @media (min-width: $media-md) {
+    z-index: -200;
   }
 }
 
@@ -75,5 +81,9 @@ canvas {
 
   @media (max-width: $media-xs) {
     display: none !important;
+  }
+
+  @media (min-width: $media-xl) {
+    margin-left: 900px;
   }
 }

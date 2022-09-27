@@ -45,11 +45,8 @@ class RayMarcher {
 
   async loadFragmentShader(callback) {
     this.loaded = false;
-
     const fs = await (await fetch(fragmentURL)).text();
-
     this.setFragmentShader(fs, callback);
-
     return this;
   }
 
@@ -142,16 +139,15 @@ class RayMarcher {
   }
 
   setSize() {
-    if (window.innerWidth > window.innerHeight) {
-      this.width = (window.innerWidth / 3) * 2;
-      this.height = window.innerHeight;
-    } else {
-      this.width = (window.innerHeight / 3) * 2;
-      this.height = window.innerHeight;
-    }
+    this.width = Math.min(
+      window.innerWidth,
+      Math.max(700, window.innerHeight) * 0.775,
+    );
+    this.height = Math.max(700, window.innerHeight);
 
     if (this.resolution) {
       this.resolution.set(this.width, this.height);
+      console.log(this.resolution);
     } else {
       this.resolution = new THREE.Vector2(this.width, this.height);
     }
