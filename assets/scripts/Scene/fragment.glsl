@@ -158,15 +158,15 @@ vec2 field(vec3 position) {
   noise += time * 0.1;
   float pnoise = 1.0 + perlin(noise);
 
-  float xBase = (resolution.x / 800.0) + 2.5;
+  float xBase = (resolution.x / 800.0);
 
   // vec2 torus1 = torus(position, vec2(4.5, 0.7), vec3(xBase, 6.0, 0.0), (quat + 2.5) * 0.8);
-  vec2 torus2 = torus(position, vec2(4.5, 0.7), vec3(xBase, 0.0, 0.0), vec4(1.0 + mouseY, 3.0, 1.0 + mouseX, mouseDT));
+  vec2 torus2 = torus(position, vec2(5.0, 0.8), vec3(xBase, 0.0, 0.0), vec4(1.0 + mouseY, 3.0, 1.0 + mouseX, mouseDT));
   // vec2 torus3 = torus(position, vec2(4.5, 0.7), vec3(xBase, -6.0, 0.0), (quat + 1.0) * 0.8);
 
-  vec2 cube1 = roundBox(position, vec3(1.5), 0.5, vec3(xBase - 2.0, 6.0, 0.0), quat);
+  vec2 cube1 = roundBox(position, vec3(2.0), 0.5, vec3(xBase - 2.5, 6.5, 0.0), quat);
   // vec2 cube2 = roundBox(position, vec3(1.5), 0.5, vec3(xBase, 0.0, 0.0), quat);
-  vec2 cube3 = roundBox(position, vec3(1.5), 0.5, vec3(xBase + 2.0, -6.0, 0.0), quat);
+  vec2 cube3 = roundBox(position, vec3(2.0), 0.5, vec3(xBase + 2.5, -6.5, 0.0), quat);
 
   vec2 fig1 = cube1;
   vec2 fig2 = torus2;

@@ -2,35 +2,31 @@ import * as THREE from "three";
 
 import fragmentURL from "url:./fragment.glsl";
 
-const RayMarcher = (function () {
-  const tl = new THREE.TextureLoader();
-  const cl = new THREE.CubeTextureLoader();
-  const mouse = new THREE.Vector3();
-  const baseColor = new THREE.Vector3();
+class RayMarcher {
+  tl = new THREE.TextureLoader();
+  cl = new THREE.CubeTextureLoader();
+  mouse = new THREE.Vector3();
+  baseColor = new THREE.Vector3();
+  distance = 40;
+  precision = 0.01;
+  scene = new THREE.Scene();
+  renderer = new THREE.WebGLRenderer({ alpha: true });
+  geom = new THREE.BufferGeometry();
+  mesh = new THREE.Mesh(this.geom, null);
+  camera = new THREE.PerspectiveCamera(60, 1, 0.1, 1);
+  target = new THREE.Vector3();
+  renderCamera = new THREE.OrthographicCamera(
+    -1,
+    1,
+    1,
+    -1,
+    1 / Math.pow(2, 53),
+    1,
+  );
 
-  function RayMarcher(distance, precision) {
-    this.distance = distance || 50;
-    this.precision = precision || 0.01;
-
-    //scene setup
-
-    this.scene = new THREE.Scene();
-
-    this.renderer = new THREE.WebGLRenderer({
-      alpha: true,
-      antialias: true,
-    });
-
-    this.domElement = this.renderer.domElement;
-
-    this.width = window.innerWidth;
-    this.height = window.innerHeight;
-    this.resolution = new THREE.Vector2(this.width, this.height);
-    this.setSize(this.width, window.innerHeight);
-
-    //geometry setup
-
-    this.geom = new THREE.BufferGeometry();
+  constructor() {
+    window.addEventListener("resize", () => this.setSize());
+    this.setSize();
     this.geom.setAttribute(
       "position",
       new THREE.BufferAttribute(
@@ -40,29 +36,14 @@ const RayMarcher = (function () {
         3,
       ),
     );
-    this.mesh = new THREE.Mesh(this.geom, null);
     this.scene.add(this.mesh);
-
-    // cameras
-
-    this.camera = new THREE.PerspectiveCamera(60, 1, 0.1, 1);
-    this.target = new THREE.Vector3();
-
-    //used only to render the scene
-
-    this.renderCamera = new THREE.OrthographicCamera(
-      -1,
-      1,
-      1,
-      -1,
-      1 / Math.pow(2, 53),
-      1,
-    );
-
-    return this;
   }
 
-  async function loadFragmentShader(callback) {
+  get domElement() {
+    return this.renderer.domElement;
+  }
+
+  async loadFragmentShader(callback) {
     this.loaded = false;
 
     const fs = await (await fetch(fragmentURL)).text();
@@ -72,7 +53,7 @@ const RayMarcher = (function () {
     return this;
   }
 
-  function setFragmentShader(fs, cb) {
+  setFragmentShader(fs, cb) {
     this.startTime = Date.now();
     this.mesh.material = this.material = new THREE.ShaderMaterial({
       uniforms: {
@@ -80,8 +61,8 @@ const RayMarcher = (function () {
           type: "v2",
           value: this.resolution,
         },
-        mouse: { type: "v3", value: mouse },
-        baseColor: { type: "v3", value: baseColor },
+        mouse: { type: "v3", value: this.mouse },
+        baseColor: { type: "v3", value: this.baseColor },
         time: { type: "f", value: 0 },
         randomSeed: { type: "f", value: Math.random() },
         fov: { type: "f", value: 45 },
@@ -101,7 +82,7 @@ const RayMarcher = (function () {
     return this;
   }
 
-  function setTexture(name, url) {
+  setTexture(name, url) {
     if (this.material == null) {
       throw new Error(
         "material not initialized, use setFragmentShader() first.",
@@ -111,7 +92,7 @@ const RayMarcher = (function () {
 
     var scope = this;
     this.material.uniforms[name] = { type: "t", value: null };
-    tl.load(url, function (texture) {
+    this.tl.load(url, function (texture) {
       scope.material.uniforms[name].value = texture;
       scope.material.needsUpdate = true;
       scope.loaded = true;
@@ -120,7 +101,7 @@ const RayMarcher = (function () {
     return this;
   }
 
-  function setCubemap(name, urls) {
+  setCubemap(name, urls) {
     if (this.material == null) {
       throw new Error(
         "material not initialized, use setFragmentShader() first.",
@@ -130,7 +111,7 @@ const RayMarcher = (function () {
 
     var scope = this;
     this.material.uniforms[name] = { type: "t", value: null };
-    cl.load(urls, function (texture) {
+    this.cl.load(urls, function (texture) {
       scope.material.uniforms[name].value = texture;
       scope.material.needsUpdate = true;
       scope.loaded = true;
@@ -138,7 +119,7 @@ const RayMarcher = (function () {
     });
   }
 
-  function setUniform(name, type, value) {
+  setUniform(name, type, value) {
     if (this.material == null) {
       throw new Error(
         "material not initialized, use setFragmentShader() first.",
@@ -149,7 +130,7 @@ const RayMarcher = (function () {
     return this;
   }
 
-  function getUniform(name) {
+  getUniform(name) {
     if (this.material == null) {
       console.warn(
         "raymarcher.getUniform: material not initialized, use setFragmentShader() first.",
@@ -160,26 +141,27 @@ const RayMarcher = (function () {
     return this.material.uniforms[name];
   }
 
-  function setSize(width, height) {
-    this.width = width;
-    this.height = height;
+  setSize() {
+    if (window.innerWidth > window.innerHeight) {
+      this.width = (window.innerWidth / 3) * 2;
+      this.height = window.innerHeight;
+    } else {
+      this.width = (window.innerHeight / 3) * 2;
+      this.height = window.innerHeight;
+    }
 
-    this.resolution.set(width, height);
+    if (this.resolution) {
+      this.resolution.set(this.width, this.height);
+    } else {
+      this.resolution = new THREE.Vector2(this.width, this.height);
+    }
 
-    this.renderer.setSize(width, height);
+    this.renderer.setSize(this.width, this.height);
 
     return this;
   }
 
-  function update() {
-    const needResize =
-      this.domElement.clientWidth !== window.innerWidth ||
-      this.domElement.clientHeight !== window.innerHeight;
-
-    if (needResize) {
-      this.setSize(window.innerWidth, window.innerHeight);
-    }
-
+  update() {
     if (this.material == null) return;
 
     this.material.uniforms.resolution.value.x = this.width;
@@ -199,28 +181,13 @@ const RayMarcher = (function () {
     this.camera.lookAt(this.target);
   }
 
-  function render() {
+  render() {
     if (this.loaded) {
       this.update();
 
       this.renderer.render(this.scene, this.renderCamera);
     }
   }
-
-  var _p = RayMarcher.prototype;
-  _p.constructor = RayMarcher;
-
-  _p.loadFragmentShader = loadFragmentShader;
-  _p.setFragmentShader = setFragmentShader;
-  _p.setTexture = setTexture;
-  _p.setCubemap = setCubemap;
-  _p.setUniform = setUniform;
-  _p.getUniform = getUniform;
-  _p.setSize = setSize;
-  _p.update = update;
-  _p.render = render;
-
-  return RayMarcher;
-})();
+}
 
 export default RayMarcher;
