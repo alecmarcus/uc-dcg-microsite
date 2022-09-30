@@ -307,7 +307,7 @@ void main() {
     // vec3 light1 = max(0.0, dot(lig1, nor)) * color1;
 
     // vec3 lightColor = baseColor * 0.025 + ((baseColor.x + baseColor.y + baseColor.x) / 6.0);
-    vec3 lightColor = baseColor * (1.0 / (baseColor.x + baseColor.y + baseColor.x) / 22.0);
+    vec3 lightColor = baseColor * (1.0 / (baseColor.x + baseColor.y + baseColor.x) / 16.0);
     vec3 lightPos = vec3(0.0, 1.0, 2.0);
     vec3 light = max(0.0, dot(lightPos, nor)) * lightColor;
 
