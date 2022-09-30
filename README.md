@@ -4,18 +4,18 @@ Landing page for the upcoming DCG Institute at UConn. Built with TypeScript, HTM
 
 ## Developing
 
-0. Clone & enter the directory:
+1. Clone & enter the directory:
 ```sh
 cd uconn-gcd-inst
 ```
 
-0. Install dependencies:
+2. Install dependencies:
 
 ```sh
 yarn
 ```
 
-0. Start the server:
+3. Start the server:
 ```sh
 yarn start
 ```
